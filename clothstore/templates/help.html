@@ -1,0 +1,197 @@
+{% extends 'home.html' %}
+
+{% block starts %}
+{%load static%}
+<style>
+    .container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+/*  */
+.containerrrr {
+    background-color: transparent;
+    padding: 10px;
+}
+
+.toppp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+
+    padding:15px 10px 10px 10px;
+
+}
+
+.logooo {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    color:rgb(152, 119, 8);
+}
+
+.navvp {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.liip {
+    padding: 10px;
+    list-style: none;
+    color: green; /* Set link color to green */
+    text-decoration: none; /* Remove underline */
+}
+
+.liip:hover {
+    color: rgb(255, 192, 0);
+}
+
+.logooo img {
+    margin-right: 10px;
+}
+
+
+/* error */
+
+.messages-error,
+    .messages-success {
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        margin-top: 30px;
+    }
+    
+    .messages-error {
+        background-color: rgb(230, 104, 104);
+        color: white;
+
+        margin-right: 5%; /* Adjust as needed for right margin */
+        padding-right: 5%; /* Adjust as needed for right padding */
+    }
+    .messages-success {
+        background-color: rgb(171, 255, 207);
+        color: rgb(7, 3, 3);
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+    
+    .messages-container {
+        height: 20px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 10px;
+    }
+    
+</style>
+
+<body>
+    <!-- error messages -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <h5 class="{% if message.tags == 'success' %}messages-success{% elif message.tags == 'error' %}messages-error{% endif %}">
+                {{ message }} <span class="close-btn" onclick="closeMessage(this)">x</span>
+            </h5>
+        {% endfor %}
+    </div>
+    <script>
+        // JavaScript to delay redirection
+        setTimeout(function() {
+            window.location.href = '/';
+        }, 4000);  // 4000 milliseconds (4 seconds) delay
+    </script>
+    {% endif %}
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(function () {
+              var messagesContainer = document.querySelector('.messages-container');
+              if (messagesContainer) {
+                  messagesContainer.style.display = 'none';
+              }
+          }, 5000);
+      });
+    
+      function closeMessage(element) {
+          element.parentElement.style.display = 'none';
+      }
+    </script>
+
+
+    <!-- main -->
+    <div class="containerrrr">
+        <div class="toppp">
+    <div class="logooo">
+        <img src="{% static 'logoaa.png' %}" width="50px" height="50px"> 
+        Fashion Shop            </div>
+    <div class="navvp">
+        <a class="liip" href="{% url 'home' %}"><li>HOME</li></a>
+        <a class="liip" href="{% url 'fruits' %}" ><li>MEN</li></a>
+        <a class="liip" href="{% url 'vegetables' %}"><li>LADIES</li></a>
+        <a class="liip" href="{% url 'cart' %}"><li>CART</li></a>
+        <a class="liip" href="{% url 'loginform' %}"><li>LOGIN</li></a>
+        <a class="liip" href="{% url 'register' %}"><li>REGISTER</li></a>
+        <a class="liip" href="{% url 'updation' %}"><li>ACCOUNT</li></a>
+        <a class="liip"  href="{% url 'contact_us' %}"><li>CONTACT US</li></a>
+    </div>
+</div>
+</div>
+
+
+
+    <div class="container">
+        <h1>Help Center</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endblock %}

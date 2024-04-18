@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+{% load static %}
+
+<style>
+    /* this is small part of footer inherited from home  */
+     .footer {
+    background-color: #0f1d2c;
+    color: white;
+    padding: 20px;
+    position: relative;
+    margin-top: 40px;
+        }
+
+
+        body, html {
+    font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-image: url("{% static 'clothing.jpg' %}");
+    background-size: cover;
+    background-position: center center;
+    margin: 0;
+    padding: 0;
+    color: black;
+    height: 100%; /* Set height to cover full viewport */
+}
+
+ 
+  .container {
+      width: 400px;
+      margin: 100px auto;
+      background-color: rgb(129, 107, 9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  h2 {
+      text-align: center;
+      /* margin-bottom: 20px; */
+  }
+  
+  label {
+      display: block;
+      margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+  }
+  
+  button {
+      background-color: #000000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    margin: 20px;
+    margin-left: 220px;
+
+  }
+  
+  button:hover {
+      background-color: #3f444a;
+  }
+
+
+/* error messaging  */
+
+.messages-error,
+    .messages-success {
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        margin-top: 30px;
+    }
+    
+    .messages-error {
+        background-color: rgb(230, 104, 104);
+        color: white;
+
+        margin-right: 5%; /* Adjust as needed for right margin */
+        padding-right: 5%; /* Adjust as needed for right padding */
+    }
+    .messages-success {
+        background-color: rgb(171, 255, 207);
+        color: rgb(7, 3, 3);
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+    
+    .messages-container {
+        height: 20px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 10px;
+    }
+    
+    
+    .have{
+        color: black;
+    }
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    
+    <!-- succes and error message -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <h5 class="{% if message.tags == 'success' %}messages-success{% elif message.tags == 'error' %}messages-error{% endif %}">
+                {{ message }} <span class="close-btn" onclick="closeMessage(this)">x</span>
+            </h5>
+        {% endfor %}
+    </div>
+    <script>
+        // JavaScript to delay redirection
+        setTimeout(function() {
+            window.location.href = '/';
+        }, 4000);  // 4000 milliseconds (4 seconds) delay
+    </script>
+    {% endif %}
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(function () {
+              var messagesContainer = document.querySelector('.messages-container');
+              if (messagesContainer) {
+                  messagesContainer.style.display = 'none';
+              }
+          }, 5000);
+      });
+    
+      function closeMessage(element) {
+          element.parentElement.style.display = 'none';
+      }
+    </script>
+
+
+
+
+
+
+
+
+<!-- form  -->
+
+<div class="container" >
+  <h2>Login</h2>
+  <form method="post" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+      
+      <label for="email">Email:</label>
+      <input  type="email" id="email" name="email" required>
+
+      
+      <label for="password">Password:</label>
+      <input  type="password" id="password" name="password" required>
+      
+   
+       
+
+
+<br>
+<p>don't have account <a href="{% url 'register' %}"><br>signup </a></p>
+      <button type="submit">login</button>
+  </form>
+  
+</div> 
+
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+<style>
+.containerrrr {
+    background-color: transparent;
+    padding: 10px;
+}
+
+.toppp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+
+    padding:15px 10px 10px 10px;
+
+}
+
+.logooo {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    color:rgb(141, 140, 104);
+}
+
+.navvp {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.liip {
+    padding: 10px;
+    list-style: none;
+    color: green; /* Set link color to green */
+    text-decoration: none; /* Remove underline */
+}
+
+.liip:hover {
+    color: rgb(255, 192, 0);
+}
+
+.logooo img {
+    margin-right: 10px;
+}
+
+
+
+
+/* fruits */
+
+    
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8e6d4; /* Light gray background */
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+.fruit {
+    margin: 10px;
+    border: 2px solid #ddd; /* Light gray border */
+    border-radius: 10px;
+    background-color: #fff; /* White background */
+    padding: 20px;
+    width: calc(25% - 20px); /* Adjusted width for four fruits per row */
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.fruit img {
+    max-width: 100%;
+    max-height: 150px; /* Adjust height as needed */
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.add-to-cart {
+    background-color: #4caf50; /* Green button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.cart {
+    position: fixed;
+    nav-down: 20px;
+    right: 20px;
+    background-color: #fff; /* White background */
+    border: 2px solid #ddd; /* Light gray border */
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+}
+
+.cart h2 {
+    margin-top: 0;
+}
+
+.cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.checkout {
+    background-color: #008CBA; /* Blue button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.checkout:hover {
+    background-color: #005f77; /* Darker blue on hover */
+}
+
+</style>
+</head>
+<body>
+    <div class="containerrrr">
+        <div class="toppp">
+            <div class="logooo">
+                <img src="{% static 'logoaa.png' %}" width="50px" height="50px"> 
+                Fashion Shop            </div>
+            <div class="navvp">
+                <a class="liip" href="{% url 'home' %}"><li>HOME</li></a>
+                <a class="liip" href="{% url 'fruits' %}" ><li>MEN</li></a>
+                <a class="liip" href="{% url 'vegetables' %}"><li>LADIES </li></a>
+                <a class="liip" href="{% url 'cart' %}"><li>CART</li></a>
+                <a class="liip" href="{% url 'loginform' %}"><li>LOGIN</li></a>
+                <a class="liip" href="{% url 'register' %}"><li>REGISTER</li></a>
+                <a class="liip" href="{% url 'updation' %}"><li>ACCOUNT</li></a>
+                <a class="liip"  href="{% url 'contact_us' %}"><li>CONTACT US</li></a>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- fruits -->
+
+
+        <div class="container">
+            {% for fruit in fruits %}
+            <div class="fruit">
+                <img src="{{ fruit.image.url }}" alt="{{ fruit.name }}">
+                <div class="details">
+                    <p class="name">{{ fruit.mensclothes }}</p>
+                    <p class="price">${{ fruit.price }} each</p>
+                    <form method="post">    {% csrf_token %}
+                        <input type="hidden" name="fruit_id" value="{{ fruit.id }}"> <!-- Hidden input for fruit ID -->
+
+                        <button class="add-to-cart" >Add to Cart</button></form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      <!--      -->
+    </div>
+</div>
+<div class="cart">
+    <h2>Cart</h2>
+    <ul class="cart-items">
+        <!-- Cart items will be dynamically added here -->
+    </ul>
+    <a href="{% url 'cart' %}"><button class="checkout" >Checkout</button></a>
+</body>
+</html>

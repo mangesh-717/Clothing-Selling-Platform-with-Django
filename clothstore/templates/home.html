@@ -1,0 +1,291 @@
+<html>
+    <head>
+        <title>Fruits Website Landing page</title>
+        <link rel="stylesheet" href="style.css">
+        {% load static %}
+
+    </head>
+
+
+
+
+
+
+
+<style>
+.footer {
+    background-color: #0f1d2c;
+    color: white;
+    padding: 20px;
+    margin-top: 0px;
+
+} 
+
+
+   
+
+.footer a:hover,
+.column a:hover {
+    color: rgb(191, 151, 7);
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer li {
+    margin-bottom: 10px; /* Adjust margin for better spacing */
+}
+
+.social-icons {
+    margin-right: 10px;
+    font-size: 33px;
+}
+
+.footer-columns {
+    display: flex;
+    flex-wrap: wrap; /* Allow columns to wrap to the next line on smaller screens */
+}
+
+.column {
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 20px; /* Adjust margin for better spacing */
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column; /* Stack columns vertically on smaller screens */
+    }
+
+    .column {
+        flex: 1;
+        margin-right: 0;
+    }
+} 
+
+</style>
+
+    {% block starts %}
+
+    <style>
+
+
+
+
+
+
+
+/* Landing page styles */
+*{padding:0;
+    margin:0;
+}
+
+.containerrrr{
+    height: 100%;
+    width: 100%;
+    background-image: url('{% static "clothing.jpg" %} ');
+    background-size:cover;
+}
+.toppp{
+    display: flex;
+    flex-direction: row;
+   
+    justify-content: space-between;
+    padding:15px 10px 10px 10px;
+}
+.logooo{
+    width: 40%;
+    height: 50px;
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    color:white;
+}
+/* 
+
+
+*/
+.navvp {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0px 20px;
+    font-weight: bold;
+    font-size: 18px;
+    color: rgb(12, 82, 0);
+}
+
+.navvp .liip {
+    padding: 10px;
+    text-decoration: none; /* Remove underline */
+    color: rgb(8, 73, 13);
+    /* Inherit color from parent */
+}
+
+.navvp .liip:hover {
+    color: rgb(255, 192, 0);
+    background-color: rgb(12, 82, 0);
+    cursor: pointer;
+}
+
+
+
+.rightt{
+    width: 600px;
+    height: 400px;
+    /* background-image: url('{% static "mangooo.png" %}'); */
+    background-size:cover;
+    position: relative;
+    left: -50px;
+
+}
+.headingggs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding-top:100px;
+}
+.texttt{
+    font-size: 70px;
+    width: 470px;
+    color:white;
+
+}
+.spp{
+    font-weight: bold;
+    color:rgb(54, 69, 21);
+}
+.pp{
+    color:rgb(12,150,2);
+    padding:10px 0px;
+}
+.but{
+    padding:10px 20px;
+    border-radius: 30px;
+    border:none;
+    font-weight: bold;
+    color:rgb(12,82,0);
+    background-color:rgb(255,192,0);
+}
+
+/* footer */
+
+
+
+    </style>
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Fruits Website Landing page</title>
+     <link rel="stylesheet" href="{% static 'style.css' %}">
+     {% load static %}
+ </head>
+ <body>
+
+    <div class="containerrrr">
+        <div class="toppp">
+            <div class="logooo">
+               <img src="{%static 'logoaa.png' %}" width="50px" height="50px"> 
+               Fashion Shop
+            </div>
+
+
+            <div class="navvp">
+                <a class="liip" href="{% url 'home' %}"><li>HOME</li></a>
+                <a class="liip" href="{% url 'fruits' %}" class="nav-link"><li class="liip">MEN</li></a>
+                <a class="liip" href="{% url 'vegetables' %}"><li>LADIES</li></a>
+                <a class="liip" href="{% url 'cart' %}"><li>CART</li></a>
+                <a class="liip" href="{%url 'loginform' %}"><li>LOGIN</li></a>
+                <a class="liip" href="{%url 'register' %}"><li>REGISTER</li></a>
+                <a class="liip"  href="{% url 'updation' %}"><li>ACCOUNT</li></a>
+                <a class="liip"  href="{% url 'contact_us' %}"><li>CONTACT US</li></a>
+            </div>
+            
+        </div>
+        <div class="headingggs">
+            <div class="left">
+                <div class="texttt">
+                    Discover <strong> your style, </strong>effortlessly.
+
+
+
+
+
+                    
+                </div>
+                <p class="pp">Save up to <span class="spp">$100</span>on your monthy clothes</p>
+                <br><a href="{% url 'fruits' %}" class="but">SHOPPING</a>
+            </div>
+            <div class="rightt"></div>
+        </div>
+    </div>
+</body>
+        <!-- footer -->
+        
+        {% endblock %}
+
+
+
+ <div class="footer">
+    <div class="footer-columns">
+        <div class="column contact-column">
+            <h3><a  class="hover-link">Contact Us</a></h3>
+            <ul>
+                <li><a href="tel:+919359624699" class="hover-link">+919359624699</a></li>
+                <li><a href="mailto:prashantsatale9545@gmail.com" class="hover-link">prashantsatale9545@gmail.com</a></li>
+            </ul>
+        </div>
+        
+        <div class="column help-column">
+            <h3><a  class="hover-link">Help & FAQs</a></h3>
+            <ul>
+                <li><a href="{% url 'contact_us' %}" class="hover-link">Customer Support</a></li>
+                <li><a href="{% url 'contact_us' %}" class="hover-link">Report an Issue</a></li>
+                <li><a href="{%url 'contact_us' %}" class="hover-link">Help Center</a></li>
+            </ul>
+        </div>
+
+        <div class="column social-media-column">
+            <h3><a  class="hover-link">Follow Us</a></h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/919359624699?text=Hello%20from%20your%20website!"><i class="fab fa-whatsapp"></i></a>
+                <a href=""><i class="fab fa-linkedin"></i></a> 
+                <a href="mailto:prashantsatale9545@gmail.com" class="hover-link">
+                  <i class="far fa-envelope"></i>
+              </a>
+            </div>
+        </div>
+
+        <div class="column careers-column">
+            <h3><a  class="hover-link">Careers</a></h3>
+            <p>Join our team and grow with us. <a href="{% url 'contact_us' %}" class="hover-link">Learn more</a></p>
+        </div>
+    </div>
+    
+      <p>&copy; 2024 Fashion Shop. All rights reserved. | Terms of Use:-
+      <p>Login is required to view Mens, Ladies, and manage your cart. Before exploring our selection or making any purchases, please <a href="/login">log in</a> or <a href="/signup">register</a> if you don't have an account yet.</p>
+
+    </p>
+</div>
+
+<!-- Font Awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>
+    </body>
+</html>

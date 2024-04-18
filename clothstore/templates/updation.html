@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Resetting default styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Centering content vertically */
+        .container {
+            max-width: 400px;
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 100px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .profile-info label {
+            font-weight: bold;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+        }
+
+        .update-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .update-link:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        .order {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .order:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background-color: #e1e6eb;
+            color: #090606;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .order-button:hover {
+            background-color: #3d4349;
+        }
+
+        .update-form {
+        margin-top: 20px;
+        position: absolute; /* Position the form absolutely */
+        top: 50%; /* Place it in the middle vertically */
+        left: 50%; /* Place it in the middle horizontally */
+        transform: translate(-50%, -50%); /* Center it precisely */
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        z-index: 1001; /* Ensure the form is above other content */
+    }
+
+        .update-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .update-form input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .update-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .update-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Navbar styling */
+        .containerrrr {
+            background-color: transparent;
+            padding: 10px;
+            position: fixed; /* Fix the navbar at the top */
+            width: 100%; /* Make the navbar span the entire width */
+            z-index: 1000; /* Ensure the navbar is above other content */
+        }
+
+        .toppp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: green;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 10px 10px 10px;
+        }
+
+        .logooo {
+            width: 40%;
+            height: 50px;
+            display: flex;
+            font-size: 30px;
+            align-items: center;
+            color: rgb(100, 85, 85);
+        }
+
+        .navvp {
+            width: 50%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .liip {
+            padding: 10px;
+            list-style: none;
+            color: green; /* Set link color to green */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .liip:hover {
+            color: rgb(255, 192, 0);
+        }
+
+        .logooo img {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="containerrrr">
+        <div class="toppp">
+            <div class="logooo">
+                <img src="{% static 'logoaa.png' %}" width="50px" height="50px"> 
+                Fashion Shop
+            </div>
+            <div class="navvp">
+                <a class="liip" href="{% url 'home' %}"><li>HOME</li></a>
+                <a class="liip" href="{% url 'fruits' %}" ><li>MEN</li></a>
+                <a class="liip" href="{% url 'vegetables' %}"><li>LADIES</li></a>
+                <a class="liip" href="{% url 'cart' %}"><li>CART</li></a>
+                <a class="liip" href="{% url 'loginform' %}"><li>LOGIN</li></a>
+                <a class="liip" href="{% url 'register' %}"><li>REGISTER</li></a>
+                <a class="liip" href="{% url 'updation' %}"><li>ACCOUNT</li></a>
+                <a class="liip"  href="{% url 'contact_us' %}"><li>CONTACT US</li></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile container -->
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="profile-info">
+            <label><i class="fas fa-user icon"></i>Name:</label>
+            <p>{{ user_name }}</p>
+        </div>
+        <div class="profile-info">
+            <label><i class="fas fa-envelope icon"></i>Email:</label>
+            <p>{{ user_email }}</p>
+        </div>
+        <div class="profile-info">
+            <label><i class="fas fa-phone icon"></i>Contact Number:</label>
+            <p>{{ user_phone }} <a href="#" class="update-link" id="update-phone-link">Update</a></p>
+        </div>
+        <div class="profile-info">
+            <label><i class="fas fa-map-marker-alt icon"></i>Address:</label>
+            <p>{{ user_address }} <a href="#" class="update-link" id="update-address-link">Update</a></p>
+        </div>
+        <br>
+        <br>
+        <h4>Your Orders</h4>
+        <div class="order">
+            <!-- Order details go here -->
+            <a href="{% url 'ordered' %}" class="order-button">Orders</a>
+        </div>
+        <!-- Add more orders as needed -->
+    </div>
+
+    <!-- Update forms -->
+    <div id="update-address" class="update-form" style="display: none;">
+        <h2>Update Address</h2>
+        <form action="{% url 'updation' %}" method="post">
+            {% csrf_token %}
+            <label for="new-address">New Address:</label>
+            <input type="text" id="new-address" name="new-address" required>
+            <button type="submit">Update Address</button>
+        </form>
+    </div>
+
+    <div id="update-phone" class="update-form" style="display: none;">
+        <h2>Update Phone Number</h2>
+        <form action="{% url 'updation' %}" method="post">
+            {% csrf_token %}
+            <label for="new-phone">New Phone Number:</label>
+            <input type="text" id="new-phone" name="new-phone" required>
+            <button type="submit">Update Phone Number</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('update-address-link').addEventListener('click', function() {
+            document.getElementById('update-address').style.display = 'block';
+            document.getElementById('update-phone').style.display = 'none';
+        });
+
+        document.getElementById('update-phone-link').addEventListener('click', function() {
+            document.getElementById('update-phone').style.display = 'block';
+            document.getElementById('update-address').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

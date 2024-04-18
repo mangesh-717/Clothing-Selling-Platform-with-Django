@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        /* CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d2cfc2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+            width: calc(25% - 40px);
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .details {
+            text-align: center;
+        }
+
+        .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .quantity {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quantity-btn {
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+
+        .checkout-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #0e6e10;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.total {
+    position: fixed;
+    bottom: 0;
+    right: 20px; /* Adjust the right offset as needed */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.messages-error,
+    .messages-success {
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        margin-top: 30px;
+    }
+    
+    .messages-error {
+        background-color: rgb(230, 104, 104);
+        color: white;
+
+        margin-right: 5%; /* Adjust as needed for right margin */
+        padding-right: 5%; /* Adjust as needed for right padding */
+    }
+    .messages-success {
+        background-color: rgb(171, 255, 207);
+        color: rgb(7, 3, 3);
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+    
+    .messages-container {
+        height: 20px;
+        text-align: center;
+        font-size: 16px;
+        position: fixed;
+        width: 100%;
+        top: 10px;
+    }
+    
+    
+    .have{
+        color: black;
+    }
+
+
+
+
+
+
+
+    </style>
+    
+    <!-- succes and error message -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <h5 class="{% if message.tags == 'success' %}messages-success{% elif message.tags == 'error' %}messages-error{% endif %}">
+                {{ message }} <span class="close-btn" onclick="closeMessage(this)">x</span>
+            </h5>
+        {% endfor %}
+    </div>
+    <script>
+        // JavaScript to delay redirection
+        setTimeout(function() {
+            window.location.href = '/';
+        }, 4000);  // 4000 milliseconds (4 seconds) delay
+    </script>
+    {% endif %}
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(function () {
+              var messagesContainer = document.querySelector('.messages-container');
+              if (messagesContainer) {
+                  messagesContainer.style.display = 'none';
+              }
+          }, 5000);
+      });
+    
+      function closeMessage(element) {
+          element.parentElement.style.display = 'none';
+      }
+    </script>
+
+</head>
+<body>
+   
+
+
+
+    
+    <!--  -->
+
+    <div class="container">
+        {% for entry in cart_entries %}
+            <div class="item">
+                {% if entry.ladies_cloth_cart %}
+                    <img src="{{ entry.ladies_cloth_cart.image.url }}" alt="{{ entry.ladies_cloth_cart.Ladies_cloth_name }}">
+                    <div class="details">
+                        <p class="name">{{ entry.ladies_cloth_cart.Ladies_cloth_name }}</p>
+                        <p class="price">${{ entry.ladies_cloth_cart.price }} each</p>
+                        <div class="quantity">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-value" data-price="{{ entry.ladies_cloth_cart.price }}">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                {% elif entry.men_cloth_cart %}
+                    <img src="{{ entry.men_cloth_cart.image.url }}" alt="{{ entry.men_cloth_cart.mensclothes }}">
+                    <div class="details">
+                        <p class="name">{{ entry.men_cloth_cart.mensclothes }}</p>
+                        <p class="price">${{ entry.men_cloth_cart.price }} each</p>
+                        <div class="quantity">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-value" data-price="{{ entry.men_cloth_cart.price }}">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    
+        <!-- Repeat the above 'item' div for each fruit -->
+    </div>
+    <div class="total">
+        <p>Total: $<span id="total-cost">0.00</span></p>
+        <form id="order-form" method="post"> 
+            {% csrf_token %}
+        
+            <button type="submit" class="checkout-btn">PLACE ORDER</button>
+        </form>
+        
+    </div>
+    <script>
+        // JavaScript code here
+        document.addEventListener('DOMContentLoaded', function() {
+            const plusButtons = document.querySelectorAll('.plus');
+            const minusButtons = document.querySelectorAll('.minus');
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const quantityElement = this.parentElement.querySelector('.quantity-value');
+                    let quantity = parseInt(quantityElement.textContent);
+                    quantityElement.textContent = quantity + 1;
+                    updateTotalCost();
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const quantityElement = this.parentElement.querySelector('.quantity-value');
+                    let quantity = parseInt(quantityElement.textContent);
+                    if (quantity > 0) {
+                        quantityElement.textContent = quantity - 1;
+                        updateTotalCost();
+                    }
+                });
+            });
+
+            function updateTotalCost() {
+                let totalCost = 0;
+                document.querySelectorAll('.item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('.quantity-value').textContent);
+                    const price = parseFloat(item.querySelector('.price').textContent.replace('$', ''));
+                    totalCost += quantity * price;
+                });
+                document.getElementById('total-cost').textContent = totalCost.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>
